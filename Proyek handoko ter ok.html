@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Rekap Daily Report all Shift — NDC Jatake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== ELEGANT LIGHT THEME ===== */
+    --bg:#f5f7fb;
+    --bg-2:#eef1f8;
+    --bg-card:#ffffff;
+    --bg-card-hover:#fafbfe;
+
+    --line:#d8dce8;
+    --line-soft:#e8ecf4;
+    --line-hover:#c5cce0;
+
+    --text:#0d1117;
+    --text-secondary:#2d3748;
+    --text-muted:#5a6a82;
+    --text-light:#8896aa;
+
+    /* ===== ELEGANT ACCENTS ===== */
+    --accent-blue:#2b6cb0;
+    --accent-blue-light:#3182ce;
+    --accent-blue-glow:rgba(43,108,176,0.35);
+    --accent-blue-soft:#ebf4ff;
+
+    --accent-purple:#6b46c1;
+    --accent-purple-light:#7c3aed;
+    --accent-purple-glow:rgba(107,70,193,0.35);
+    --accent-purple-soft:#f3f0ff;
+
+    --accent-cyan:#0987a0;
+    --accent-cyan-light:#0e9aa7;
+    --accent-cyan-glow:rgba(9,135,160,0.35);
+    --accent-cyan-soft:#e0fcff;
+
+    --accent-orange:#c05621;
+    --accent-orange-light:#dd6b20;
+    --accent-orange-glow:rgba(192,86,33,0.35);
+    --accent-orange-soft:#fff5eb;
+
+    --accent-pink:#b83280;
+    --accent-pink-light:#d53f8c;
+    --accent-pink-glow:rgba(184,50,128,0.35);
+    --accent-pink-soft:#fff0f6;
+
+    /* ===== AREA COLORS ===== */
+    --gedungh:#0987a0;
+    --gedungh-light:#0e9aa7;
+    --gedungh-soft:#e0fcff;
+    --gedungh-glow:rgba(9,135,160,0.4);
+
+    --depana7:#c05621;
+    --depana7-light:#dd6b20;
+    --depana7-soft:#fff5eb;
+    --depana7-glow:rgba(192,86,33,0.4);
+
+    --limbah:#6b46c1;
+    --limbah-light:#7c3aed;
+    --limbah-soft:#f3f0ff;
+    --limbah-glow:rgba(107,70,193,0.4);
+
+    --shiftc:#2b6cb0;
+    --shiftc-light:#3182ce;
+    --shiftc-soft:#ebf4ff;
+    --shiftc-glow:rgba(43,108,176,0.4);
+
+    --danger:#e53e3e;
+    --danger-soft:#fff5f5;
+    --ok:#38a169;
+    --ok-soft:#f0fff4;
+
+    --radius:18px;
+    --radius-sm:12px;
+    --radius-lg:22px;
+
+    /* ===== SHADOW SYSTEM ===== */
+    --shadow-resting: 0 2px 8px rgba(13,17,23,0.06), 0 1px 3px rgba(13,17,23,0.04);
+    --shadow-hover: 0 8px 24px rgba(13,17,23,0.1), 0 4px 12px rgba(13,17,23,0.06);
+    --shadow-active: 0 12px 32px rgba(13,17,23,0.14), 0 6px 16px rgba(13,17,23,0.08);
+    --shadow-selected: 0 16px 40px rgba(13,17,23,0.18), 0 8px 20px rgba(13,17,23,0.1);
+    --shadow-glow-blue: 0 0 24px var(--accent-blue-glow), 0 8px 24px rgba(13,17,23,0.08);
+    --shadow-glow-cyan: 0 0 24px var(--gedungh-glow), 0 8px 24px rgba(13,17,23,0.08);
+    --shadow-glow-orange: 0 0 24px var(--depana7-glow), 0 8px 24px rgba(13,17,23,0.08);
+    --shadow-glow-purple: 0 0 24px var(--limbah-glow), 0 8px 24px rgba(13,17,23,0.08);
+  }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:24px 16px 60px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* ===== VIVID ANIMATED MESH BACKGROUND ===== */
+  .ambient-bg{
+    position:fixed; inset:0; z-index:0;
+    overflow:hidden; pointer-events:none;
+    background:
+      radial-gradient(ellipse 75% 55% at 12% 20%, rgba(43,108,176,0.14) 0%, transparent 62%),
+      radial-gradient(ellipse 65% 45% at 88% 15%, rgba(124,58,237,0.13) 0%, transparent 58%),
+      radial-gradient(ellipse 70% 50% at 50% 105%, rgba(14,154,167,0.12) 0%, transparent 58%),
+      radial-gradient(ellipse 55% 40% at 95% 90%, rgba(213,63,140,0.1) 0%, transparent 55%),
+      linear-gradient(160deg, #f6f8fd 0%, #f0f3fa 45%, #eef2fb 100%);
+    background-size:200% 200%;
+    animation:meshShift 24s ease-in-out infinite alternate;
+  }
+  @keyframes meshShift{
+    0%{ background-position:0% 0%, 100% 0%, 50% 100%, 100% 100%, 0% 0%; }
+    50%{ background-position:20% 15%, 80% 20%, 45% 90%, 90% 85%, 0% 30%; }
+    100%{ background-position:5% 25%, 95% 5%, 55% 105%, 100% 95%, 0% 0%; }
+  }
+  .ambient-bg .blob{
+    position:absolute; border-radius:50%;
+    filter:blur(90px);
+    opacity:0.65;
+    will-change:transform;
+  }
+  .ambient-bg .b1{
+    width:52vw; height:52vw; max-width:580px; max-height:580px;
+    left:-16%; top:-16%;
+    background:radial-gradient(circle at 35% 35%, var(--accent-blue-light), var(--accent-blue) 70%);
+    animation:driftA 14s ease-in-out infinite alternate;
+  }
+  .ambient-bg .b2{
+    width:47vw; height:47vw; max-width:520px; max-height:520px;
+    right:-16%; top:8%;
+    background:radial-gradient(circle at 40% 40%, var(--accent-purple-light), var(--accent-purple) 70%);
+    animation:driftB 17s ease-in-out infinite alternate;
+  }
+  .ambient-bg .b3{
+    width:42vw; height:42vw; max-width:470px; max-height:470px;
+    left:22%; bottom:-16%;
+    background:radial-gradient(circle at 45% 45%, var(--accent-cyan-light), var(--accent-cyan) 70%);
+    animation:driftC 19s ease-in-out infinite alternate;
+  }
+  .ambient-bg .b4{
+    width:37vw; height:37vw; max-width:420px; max-height:420px;
+    right:8%; bottom:-12%;
+    background:radial-gradient(circle at 40% 40%, var(--accent-pink-light), var(--accent-pink) 70%);
+    animation:driftD 15s ease-in-out infinite alternate;
+  }
+  @keyframes driftA{
+    from{ transform:translate(0,0) scale(1) rotate(0deg); }
+    to{ transform:translate(14%,16%) scale(1.35) rotate(20deg); }
+  }
+  @keyframes driftB{
+    from{ transform:translate(0,0) scale(1.08) rotate(0deg); }
+    to{ transform:translate(-16%,14%) scale(0.82) rotate(-18deg); }
+  }
+  @keyframes driftC{
+    from{ transform:translate(0,0) scale(1) rotate(0deg); }
+    to{ transform:translate(16%,-14%) scale(1.28) rotate(16deg); }
+  }
+  @keyframes driftD{
+    from{ transform:translate(0,0) scale(0.92) rotate(0deg); }
+    to{ transform:translate(-14%,-16%) scale(1.2) rotate(-22deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ambient-bg .blob, .ambient-bg{ animation:none !important; }
+  }
+
+  /* ===== FLOATING PARTICLES ===== */
+  #particleCanvas{
+    position:fixed; inset:0; z-index:0;
+    pointer-events:none;
+    opacity:0.6;
+  }
+
+  .header, .crumbs, .stage, .footer-note, .toast-wrap, .success-overlay{
+    position:relative; z-index:2;
+  }
+
+  /* ===== PREMIUM LOGO FRAME ===== */
+  .logo-frame{
+    width:min(300px, 78vw);
+    margin:0 auto 20px;
+    background:var(--bg-card);
+    border:2px solid transparent;
+    border-radius:var(--radius-sm);
+    padding:18px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: var(--shadow-hover);
+    position:relative;
+    overflow:hidden;
+    transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-image:linear-gradient(var(--bg-card), var(--bg-card)), linear-gradient(120deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan), var(--accent-pink), var(--accent-blue));
+    background-origin:border-box;
+    background-clip:padding-box, border-box;
+    background-size:100% 100%, 300% 100%;
+    animation:logoBorderFlow 7s linear infinite;
+  }
+  @keyframes logoBorderFlow{
+    0%{ background-position:0 0, 0% 50%; }
+    100%{ background-position:0 0, 300% 50%; }
+  }
+  .logo-frame:hover{
+    box-shadow: var(--shadow-active), 0 0 34px var(--accent-blue-glow);
+    transform:translateY(-2px) scale(1.015);
+  }
+  .logo-frame::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg, rgba(43,108,176,0.04) 0%, transparent 50%, rgba(107,70,193,0.03) 100%);
+    pointer-events:none;
+  }
+  .logo-frame img{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ===== HEADER / LIVE CLOCK ===== */
+  .header{width:100%; max-width:560px; text-align:center; margin-bottom:22px;}
+  .eyebrow{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-size:11px; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--accent-blue); margin-bottom:10px; font-weight:700;
+  }
+  .title{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-weight:800; font-size:27px; letter-spacing:.02em;
+    margin:0 0 24px;
+    background:linear-gradient(100deg, var(--accent-blue) 0%, var(--accent-purple) 35%, var(--accent-cyan) 65%, var(--accent-pink) 100%);
+    background-size:300% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:titleGradient 6s ease infinite;
+  }
+  @keyframes titleGradient{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+  }
+
+  .clock-board{
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-blue-soft) 130%);
+    border:2px solid var(--line-soft);
+    border-radius:var(--radius);
+    padding:20px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    box-shadow: var(--shadow-hover);
+    position:relative;
+    overflow:hidden;
+    transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .clock-board:hover{
+    box-shadow: var(--shadow-active), 0 0 32px var(--accent-blue-glow);
+    transform:translateY(-3px) scale(1.01);
+    border-color:var(--line-hover);
+  }
+  .clock-board::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan), var(--accent-pink), var(--accent-blue));
+    background-size:300% 100%;
+    animation:gradientShift 4s ease infinite;
+  }
+  .clock-board::after{
+    content:''; position:absolute; top:-50%; left:-60%;
+    width:60%; height:200%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+    transform:rotate(20deg);
+    animation:clockShine 6s ease-in-out infinite;
+  }
+  @keyframes clockShine{
+    0%{ left:-60%; }
+    45%,100%{ left:140%; }
+  }
+  @keyframes gradientShift{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+  }
+  .clock-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:34px; font-weight:700;
+    color:var(--text);
+    letter-spacing:.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .clock-time .sec{ color:var(--accent-blue); font-weight:600; }
+  .clock-time .blink{ animation:blink 1s steps(1) infinite; }
+  @keyframes blink{ 50%{opacity:.3;} }
+  .clock-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--text-muted); text-align:right; line-height:1.8;
+  }
+  .clock-date b{color:var(--text-secondary); font-weight:700;}
+  .status-dot{
+    display:inline-block; width:8px; height:8px; border-radius:50%;
+    background:var(--ok); margin-right:6px;
+    box-shadow:0 0 8px rgba(56,161,105,.5);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 
+    0%,100%{opacity:1; transform:scale(1);} 
+    50%{opacity:.4; transform:scale(0.8);} 
+  }
+
+  /* ===== REJECT PALLET CARDS (LIVELY GRADIENT) ===== */
+  .reject-board{
+    width:100%; max-width:560px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:16px;
+  }
+  .reject-card{
+    background:var(--bg-card);
+    border:2px solid transparent;
+    border-radius:var(--radius);
+    padding:18px 16px;
+    text-align:center;
+    box-shadow:var(--shadow-hover);
+    position:relative;
+    overflow:hidden;
+    transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    isolation:isolate;
+  }
+  .reject-card::before{
+    content:''; position:absolute; inset:0; z-index:-2;
+    border-radius:inherit;
+    padding:2px;
+    background:linear-gradient(120deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan), var(--accent-pink), var(--accent-blue));
+    background-size:300% 300%;
+    animation:borderFlow 6s linear infinite;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+  }
+  .reject-card::after{
+    content:''; position:absolute; inset:2px; z-index:-1;
+    border-radius:inherit;
+    background:var(--bg-card);
+  }
+  .reject-card.pti .reject-glow{ background:radial-gradient(circle at 30% 20%, var(--accent-blue-glow), transparent 65%); }
+  .reject-card.jps .reject-glow{ background:radial-gradient(circle at 30% 20%, var(--accent-purple-glow), transparent 65%); }
+  .reject-glow{
+    position:absolute; inset:0; z-index:0;
+    opacity:0.7;
+    animation:glowPulse 3.2s ease-in-out infinite;
+  }
+  @keyframes borderFlow{
+    0%{ background-position:0% 50%; }
+    100%{ background-position:300% 50%; }
+  }
+  @keyframes glowPulse{
+    0%,100%{ opacity:0.35; }
+    50%{ opacity:0.85; }
+  }
+  .reject-card:hover{
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:var(--shadow-active);
+  }
+  .reject-label{
+    position:relative; z-index:1;
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-size:11.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--text-muted); font-weight:700; margin-bottom:8px;
+  }
+  .reject-value{
+    position:relative; z-index:1;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:40px; font-weight:800; line-height:1;
+    font-variant-numeric: tabular-nums;
+    background-size:200% 200%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:numberGradient 4s ease infinite, numberPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .reject-card.pti .reject-value{ background-image:linear-gradient(120deg, var(--accent-blue), var(--accent-cyan), var(--accent-blue-light)); }
+  .reject-card.jps .reject-value{ background-image:linear-gradient(120deg, var(--accent-purple), var(--accent-pink), var(--accent-purple-light)); }
+  @keyframes numberGradient{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+  }
+  @keyframes numberPop{
+    from{ transform:scale(0.85); opacity:0; }
+    to{ transform:scale(1); opacity:1; }
+  }
+  .reject-updated{
+    position:relative; z-index:1;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; color:var(--text-light); margin-top:6px;
+  }
+  .reject-value.loading{ opacity:.35; font-size:22px; animation:none; }
+
+  /* ===== BREADCRUMB ===== */
+  .crumbs{
+    width:100%; max-width:560px;
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:20px; min-height:26px;
+  }
+  .crumb{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; padding:7px 14px; border-radius:20px;
+    background:var(--bg-card); border:1.5px solid var(--line); color:var(--text-muted);
+    display:flex; align-items:center; gap:6px;
+    box-shadow:var(--shadow-resting);
+    transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight:500;
+  }
+  .crumb.active{ 
+    color:#fff; 
+    border-color:transparent; 
+    background:linear-gradient(120deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
+    background-size:200% 100%;
+    animation:cardEnter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards, gradientShift 4s ease infinite;
+    box-shadow:var(--shadow-hover), 0 0 16px var(--accent-blue-glow);
+    font-weight:700;
+    transform:translateY(-1px);
+  }
+
+  /* ===== CARD GRID ===== */
+  .stage{width:100%; max-width:560px;}
+  .stage-title{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-size:13px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--text-muted); margin:4px 0 18px; display:flex; align-items:center; gap:10px;
+    font-weight:700;
+  }
+  .stage-title::before{
+    content:''; width:4px; height:18px; background:var(--accent-blue); border-radius:2px; display:inline-block;
+  }
+  .grid{ display:grid; gap:14px; }
+  .grid.cols-1{ grid-template-columns:1fr; }
+  .grid.cols-2{ grid-template-columns:1fr 1fr; }
+
+  /* ===== ELEGANT CARDS WITH THICK SHADOWS ===== */
+  .card{
+    position:relative;
+    background:var(--bg-card);
+    border:2px solid var(--line-soft);
+    border-radius:var(--radius-sm);
+    padding:22px 20px;
+    text-align:left;
+    cursor:pointer;
+    transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15px; font-weight:700;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    -webkit-user-select:none; user-select:none;
+    box-shadow:var(--shadow-resting);
+    overflow:hidden;
+    will-change:transform, box-shadow;
+  }
+  .card::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    opacity:0;
+    background-size:250% 100%;
+    animation:gradientShift 3s ease infinite;
+    transition:opacity 0.3s ease;
+  }
+  .card::after{
+    content:'→'; position:absolute; right:20px; top:50%; transform:translateY(-50%);
+    color:var(--text-light); font-size:18px; font-weight:400;
+    transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card{
+    background-image:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.6) 48%, rgba(255,255,255,0.6) 52%, transparent 70%);
+    background-size:250% 100%;
+    background-position:150% 0;
+    background-repeat:no-repeat;
+  }
+  .card:active{ transform:scale(0.96); }
+  .card .sub{ font-size:11px; color:var(--text-muted); font-weight:600; font-family:'IBM Plex Mono',monospace; letter-spacing:0.02em;}
+
+  .card:hover{ 
+    transform:translateY(-6px) scale(1.015); 
+    box-shadow:var(--shadow-active);
+    border-color:var(--line-hover);
+    background-position:-50% 0;
+    transition:background-position 0.7s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .card:hover::after{ 
+    transform:translateY(-50%) translateX(6px); 
+    color:var(--text-secondary); 
+  }
+  .card:hover::before{ opacity:1; }
+
+  /* Entrance animation for dynamically rendered cards */
+  @keyframes cardEnter{
+    from{ opacity:0; transform:translateY(16px) scale(0.96); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  .card{ animation:cardEnter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+  .grid > .card:nth-child(1){ animation-delay:0.03s; }
+  .grid > .card:nth-child(2){ animation-delay:0.09s; }
+  .grid > .card:nth-child(3){ animation-delay:0.15s; }
+  .grid > .card:nth-child(4){ animation-delay:0.21s; }
+  .grid > .card:nth-child(5){ animation-delay:0.27s; }
+  .grid > .card:nth-child(6){ animation-delay:0.33s; }
+
+  .form-panel{ animation:cardEnter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+  .crumb{ animation:cardEnter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) backwards; }
+
+  /* ===== AREA-SPECIFIC CARD STYLES ===== */
+  .card.gedungh{ border-left:4px solid var(--gedungh); }
+  .card.gedungh::before{ background:linear-gradient(90deg, var(--gedungh), var(--gedungh-light)); }
+  .card.gedungh:hover{ 
+    border-color:var(--gedungh);
+    box-shadow:var(--shadow-selected), var(--shadow-glow-cyan);
+  }
+
+  .card.depana7{ border-left:4px solid var(--depana7); }
+  .card.depana7::before{ background:linear-gradient(90deg, var(--depana7), var(--depana7-light)); }
+  .card.depana7:hover{ 
+    border-color:var(--depana7);
+    box-shadow:var(--shadow-selected), var(--shadow-glow-orange);
+  }
+
+  .card.limbah{ border-left:4px solid var(--limbah); }
+  .card.limbah::before{ background:linear-gradient(90deg, var(--limbah), var(--limbah-light)); }
+  .card.limbah:hover{ 
+    border-color:var(--limbah);
+    box-shadow:var(--shadow-selected), var(--shadow-glow-purple);
+  }
+
+  .card.shift{ border-left:4px solid var(--shiftc); }
+  .card.shift::before{ background:linear-gradient(90deg, var(--shiftc), var(--shiftc-light)); }
+  .card.shift:hover{ 
+    border-color:var(--shiftc);
+    box-shadow:var(--shadow-selected), var(--shadow-glow-blue);
+  }
+
+  /* ===== CARD SELECTED STATE (THICK SHADOW) ===== */
+  .card.selected{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-selected);
+    border-width:2px;
+  }
+  .card.gedungh.selected{ border-color:var(--gedungh); box-shadow:var(--shadow-selected), var(--shadow-glow-cyan); }
+  .card.depana7.selected{ border-color:var(--depana7); box-shadow:var(--shadow-selected), var(--shadow-glow-orange); }
+  .card.limbah.selected{ border-color:var(--limbah); box-shadow:var(--shadow-selected), var(--shadow-glow-purple); }
+  .card.shift.selected{ border-color:var(--shiftc); box-shadow:var(--shadow-selected), var(--shadow-glow-blue); }
+
+  /* ===== BACK BUTTON ===== */
+  .back-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--bg-card); border:2px solid var(--line-soft); color:var(--text-muted);
+    font-family:'IBM Plex Sans', sans-serif; font-size:13px; font-weight:700;
+    padding:10px 18px; border-radius:20px; margin-bottom:18px; cursor:pointer;
+    box-shadow:var(--shadow-resting);
+    transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change:transform, box-shadow;
+  }
+  .back-btn:active{ transform:scale(0.95); }
+  .back-btn:hover{ 
+    border-color:var(--accent-blue); 
+    color:var(--accent-blue); 
+    box-shadow:var(--shadow-hover), 0 0 20px var(--accent-blue-glow);
+    transform:translateY(-2px);
+  }
+
+  /* ===== FORM PANEL ===== */
+  .form-panel{
+    background:var(--bg-card);
+    border:2px solid var(--line-soft); 
+    border-radius:var(--radius);
+    padding:26px; 
+    display:flex; flex-direction:column; gap:20px;
+    box-shadow:var(--shadow-hover);
+    position:relative;
+    overflow:hidden;
+    transition:box-shadow 0.3s ease;
+  }
+  .form-panel:hover{
+    box-shadow:var(--shadow-active);
+  }
+  .form-panel::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
+    background-size:300% 100%;
+    animation:gradientShift 5s ease infinite;
+  }
+  .form-panel .item-banner{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-size:18px; font-weight:800; padding:16px 20px; border-radius:var(--radius-sm);
+    background:linear-gradient(120deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan), var(--accent-blue));
+    background-size:300% 100%;
+    animation:gradientShift 5s ease infinite;
+    border:2px solid transparent;
+    color:#fff;
+    box-shadow:var(--shadow-resting);
+    transition:box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .form-panel .item-banner:hover{
+    box-shadow:var(--shadow-hover), 0 0 20px var(--accent-blue-glow);
+    transform:translateY(-1px) scale(1.01);
+  }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted);
+    font-family:'IBM Plex Sans Condensed', sans-serif; font-weight:700;
+  }
+  .field input, .field .readonly{
+    background:var(--bg-2); border:2px solid var(--line-soft); border-radius:var(--radius-sm);
+    padding:15px 17px; color:var(--text); font-family:'IBM Plex Mono', monospace;
+    font-size:15px; outline:none; transition:all 0.25s ease;
+    box-shadow:var(--shadow-resting);
+  }
+  .field input:focus{ 
+    border-color:var(--accent-blue); 
+    box-shadow:0 0 0 4px var(--accent-blue-glow), var(--shadow-hover);
+  }
+  .field .readonly{ color:var(--text-muted); border-style:dashed; background:var(--bg); }
+  .qty-row{ display:flex; align-items:center; gap:12px; }
+  .qty-btn{
+    width:50px; height:50px; border-radius:var(--radius-sm); border:2px solid var(--line-soft);
+    background:var(--bg-card); color:var(--text); font-size:20px; cursor:pointer; flex:none;
+    box-shadow:var(--shadow-resting);
+    transition:all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight:700;
+    will-change:transform, box-shadow;
+  }
+  .qty-btn:active{ transform:scale(0.9); }
+  .qty-btn:hover{ 
+    border-color:var(--accent-blue); 
+    color:var(--accent-blue);
+    box-shadow:var(--shadow-hover), 0 0 20px var(--accent-blue-glow);
+    transform:translateY(-2px);
+  }
+  .qty-row input{ text-align:center; font-size:22px; flex:1; font-weight:700; }
+
+  /* ===== SUBMIT BUTTON (LIVELY GRADIENT) ===== */
+  .submit-btn{
+    background:linear-gradient(110deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan), var(--accent-blue));
+    background-size:300% 100%;
+    animation:gradientShift 5s ease infinite;
+    border:none; color:#fff; font-weight:800; font-size:15px;
+    font-family:'IBM Plex Sans Condensed', sans-serif; letter-spacing:.04em;
+    padding:18px; border-radius:var(--radius-sm); cursor:pointer;
+    box-shadow:var(--shadow-hover), 0 0 24px var(--accent-blue-glow);
+    transition:box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position:relative; z-index:1;
+    overflow:hidden;
+    will-change:transform, box-shadow;
+  }
+  .submit-btn::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform:translateX(-100%);
+    transition:transform 0.7s ease;
+  }
+  .submit-btn:hover::before{ transform:translateX(100%); }
+  .submit-btn:active{ transform:scale(0.96); }
+  .submit-btn:hover{ 
+    box-shadow:var(--shadow-active), 0 0 40px var(--accent-purple-glow);
+    transform:translateY(-3px) scale(1.015);
+  }
+  .submit-btn:disabled{ opacity:.6; cursor:wait; animation-play-state:paused; }
+
+  /* ===== TOAST ===== */
+  .toast-wrap{
+    position:fixed; top:16px; left:50%; transform:translateX(-50%);
+    z-index:999; display:flex; flex-direction:column; gap:8px; width:100%;
+    max-width:520px; padding:0 14px; pointer-events:none;
+  }
+  .toast{
+    font-family:'IBM Plex Sans', sans-serif; font-size:13.5px;
+    padding:15px 19px; border-radius:var(--radius-sm); border:2px solid var(--line);
+    background:var(--bg-card); color:var(--text);
+    box-shadow:var(--shadow-active);
+    animation:slidein 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), fadeout 0.3s ease 3.7s forwards;
+    display:flex; align-items:center; gap:9px;
+    pointer-events:auto;
+    font-weight:600;
+  }
+  .toast.err{ border-color:var(--danger); background:var(--danger-soft); }
+  .toast .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .toast.err .dot{ background:var(--danger); }
+  @keyframes slidein{ from{opacity:0; transform:translateY(-15px) scale(0.95);} to{opacity:1; transform:translateY(0) scale(1);} }
+  @keyframes fadeout{ to{opacity:0; transform:translateY(-10px);} }
+
+  /* ===== SUCCESS OVERLAY ===== */
+  .success-overlay{
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(245,247,251,0.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.35s ease;
+  }
+  .success-overlay.show{ opacity:1; pointer-events:all; }
+  .success-card{
+    background:var(--bg-card);
+    border:2px solid var(--line-soft);
+    border-radius:var(--radius-lg);
+    padding:44px 40px 38px;
+    text-align:center;
+    width:min(340px, 88vw);
+    box-shadow:var(--shadow-selected), 0 0 48px var(--accent-blue-glow);
+    transform:scale(0.88) translateY(15px);
+    transition:transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .success-overlay.show .success-card{ transform:scale(1) translateY(0); }
+
+  .check-wrap{ width:90px; height:90px; margin:0 auto 20px; }
+  .check-circle{
+    fill:none; stroke:var(--ok); stroke-width:3;
+    stroke-dasharray:245; stroke-dashoffset:245;
+  }
+  .check-mark{
+    fill:none; stroke:var(--ok); stroke-width:4; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:48; stroke-dashoffset:48;
+  }
+  .success-overlay.show .check-circle{
+    animation:drawCircle 0.6s ease forwards;
+  }
+  .success-overlay.show .check-mark{
+    animation:drawCheck 0.4s ease 0.5s forwards;
+  }
+  @keyframes drawCircle{ to{ stroke-dashoffset:0; } }
+  @keyframes drawCheck{ to{ stroke-dashoffset:0; } }
+
+  .success-title{
+    font-family:'IBM Plex Sans Condensed', sans-serif;
+    font-size:22px; font-weight:800; color:var(--text); margin-bottom:8px;
+  }
+  .success-detail{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--accent-blue);
+    margin-bottom:16px; font-weight:700;
+  }
+  .success-bar-track{
+    height:4px; background:var(--line-soft); border-radius:4px; overflow:hidden; margin-top:8px;
+  }
+  .success-bar-fill{
+    height:100%; background:linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    width:100%; transform-origin:left;
+    animation:shrinkBar 15s linear forwards;
+  }
+  @keyframes shrinkBar{ from{ transform:scaleX(1);} to{ transform:scaleX(0);} }
+
+  .footer-note{
+    margin-top:32px; font-size:11px; color:var(--text-muted); text-align:center;
+    font-family:'IBM Plex Mono', monospace; max-width:560px; line-height:1.8;
+  }
+
+  @media (max-width:380px){
+    .clock-time{ font-size:28px; }
+    .grid.cols-2{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== PS4-STYLE ANIMATED BACKGROUND ===== -->
+<div class="ambient-bg">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+  <span class="blob b4"></span>
+</div>
+
+<!-- ===== FLOATING PARTICLES ===== -->
+<canvas id="particleCanvas"></canvas>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="check-wrap">
+      <svg viewBox="0 0 84 84" width="90" height="90">
+        <circle class="check-circle" cx="42" cy="42" r="39"/>
+        <path class="check-mark" d="M24 43 L37 55 L60 30"/>
+      </svg>
+    </div>
+    <div class="success-title">Berhasil Tersimpan!</div>
+    <div class="success-detail" id="successDetail">—</div>
+    <div class="success-bar-track"><div class="success-bar-fill" id="successBar"></div></div>
+  </div>
+</div>
+
+<div class="header">
+  <div class="logo-frame">
+    <img src="https://i.supaimg.com/2c2fe634-0778-4567-93bf-17d826ecd3d2/4b28b01d-7180-4bb4-bfab-8a3903af26a8.png" alt="Logo NDC Jatake">
+  </div>
+  <div class="eyebrow">NDC Jatake 6 · Pallet Management System</div>
+  <div class="title">REKAP DAILY REPORT ALL SHIFT</div>
+  <div class="clock-board">
+    <div class="clock-time" id="clockTime">--:--<span class="blink">:</span>--</div>
+    <div class="clock-date">
+      <span><span class="status-dot"></span>Live · Tersambung ke Spreadsheet</span><br>
+      <b id="clockDate">-- --- ----</b>
+    </div>
+  </div>
+
+  <!-- ===== KARTU PALLET REJECT PTI & JPS (BARU) — dibaca langsung dari Q3 & R3 via gviz, tanpa Apps Script ===== -->
+  <div class="reject-board">
+    <div class="reject-card pti">
+      <div class="reject-glow"></div>
+      <div class="reject-label">Pallet Reject PTI</div>
+      <div class="reject-value loading" id="rejectPTI">…</div>
+      <div class="reject-updated" id="rejectUpdatedPTI">memuat…</div>
+    </div>
+    <div class="reject-card jps">
+      <div class="reject-glow"></div>
+      <div class="reject-label">Pallet Reject JPS</div>
+      <div class="reject-value loading" id="rejectJPS">…</div>
+      <div class="reject-updated" id="rejectUpdatedJPS">memuat…</div>
+    </div>
+  </div>
+</div>
+
+<div class="crumbs" id="crumbs"></div>
+
+<div class="stage" id="stage"></div>
+
+<div class="footer-note">Rekap Daily Report all Shift · Pallet Management NDC Jatake 6<br>Data tersimpan otomatis ke Google Sheets</div>
+
+<script>
+/* ======================================================
+   CONFIG — URL Web App Apps Script
+   ====================================================== */
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-xGa3ppXuxUMVtcLNwU8o8Mee57Rn7PZexNo8vdB091w9RmJ5axUr9qDX127Reok7AA/exec";
+
+/* ======================================================
+   CONFIG — Pallet Reject (baca langsung Q3 & R3 via gviz)
+   Tidak menyentuh / mengubah Apps Script sama sekali.
+   ====================================================== */
+const REJECT_SHEET_ID = "1XB6nZCxPxBvNmkF5LdcVKFJHkrRZ22CSuYjL5J7pvGs";
+const REJECT_GID = "8706758"; // gid tab tempat Q3 & R3 berada
+const REJECT_RANGE = "Q3:R3";
+const REJECT_REFRESH_MS = 10000; // refresh tiap 10 detik
+
+function buildRejectGvizUrl(){
+  return `https://docs.google.com/spreadsheets/d/${REJECT_SHEET_ID}/gviz/tq?tqx=out:json&gid=${REJECT_GID}&range=${REJECT_RANGE}&t=${Date.now()}`;
+}
+
+async function fetchRejectData(){
+  const ptiEl = document.getElementById("rejectPTI");
+  const jpsEl = document.getElementById("rejectJPS");
+  const upPtiEl = document.getElementById("rejectUpdatedPTI");
+  const upJpsEl = document.getElementById("rejectUpdatedJPS");
+  try{
+    const res = await fetch(buildRejectGvizUrl());
+    const text = await res.text();
+    const jsonStr = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
+    const data = JSON.parse(jsonStr);
+    const row = data.table.rows[0];
+    const ptiVal = row.c[0] ? (row.c[0].v ?? "0") : "0";
+    const jpsVal = row.c[1] ? (row.c[1].v ?? "0") : "0";
+
+    ptiEl.textContent = ptiVal;
+    jpsEl.textContent = jpsVal;
+    ptiEl.classList.remove("loading");
+    jpsEl.classList.remove("loading");
+
+    const now = new Date();
+    const stamp = `Update ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    upPtiEl.textContent = stamp;
+    upJpsEl.textContent = stamp;
+  }catch(err){
+    ptiEl.textContent = "—";
+    jpsEl.textContent = "—";
+    upPtiEl.textContent = "Gagal memuat";
+    upJpsEl.textContent = "Gagal memuat";
+  }
+}
+fetchRejectData();
+setInterval(fetchRejectData, REJECT_REFRESH_MS);
+
+const SHIFTS = [
+  { id:"Mas Mulyadi", label:"Shift Mas Mulyadi" },
+  { id:"Mas Tris", label:"Shift Mas Tris" },
+  { id:"Mas Ismawan", label:"Shift Mas Ismawan" },
+];
+
+const AREAS = [
+  { id:"GEDUNG H", label:"GEDUNG H", css:"gedungh" },
+  { id:"DEPAN A7", label:"DEPAN A7", css:"depana7" },
+  { id:"AREA LIMBAH PALLET", label:"AREA LIMBAH PALLET", css:"limbah" },
+];
+
+const ITEMS = {
+  "GEDUNG H": [
+    { key:"KAYU_PTI", label:"KAYU PTI" },
+    { key:"DEDICATED", label:"DEDICATED" },
+  ],
+  "DEPAN A7": [
+    { key:"PALLET_JPS", label:"PALLET JPS" },
+    { key:"PALLET_ONE_WAY", label:"PALLET ONE WAY" },
+    { key:"GREY_POLOS", label:"GREY POLOS" },
+    { key:"PLASTIK_PRODUKSI", label:"PLASTIK PRODUKSI" },
+  ],
+  "AREA LIMBAH PALLET": [
+    { key:"PLASTIK_PGI", label:"PLASTIK PGI" },
+    { key:"PLASTIK_HITAM_TEBAL", label:"PLASTIK HITAM TEBAL NDC/PTI" },
+    { key:"PLASTIK_BIRU_J1J4", label:"PLASTIK BIRU J1/J4" },
+    { key:"PLASTIK_BIRU_J2", label:"PLASTIK BIRU J2" },
+    { key:"KAYU_COKLAT_TIDAK_STANDAR", label:"KAYU COKLAT POLOS/PLASTIK TIDAK STANDAR" },
+  ],
+};
+
+let state = { shift:null, area:null, item:null };
+const stageEl = document.getElementById("stage");
+const crumbsEl = document.getElementById("crumbs");
+
+/* ======================================================
+   PS4-STYLE FLOATING PARTICLES (60 FPS)
+   ====================================================== */
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = -1000, mouseY = -1000;
+let lastTime = 0;
+const TARGET_FPS = 60;
+const FRAME_INTERVAL = 1000 / TARGET_FPS;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.life = Math.random() * 400 + 200;
+    this.maxLife = this.life;
+    const colors = [
+      '43,108,176',   // blue
+      '107,70,193',   // purple
+      '9,135,160',    // cyan
+      '192,86,33',    // orange
+      '184,50,128'    // pink
+    ];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.pulseSpeed = Math.random() * 0.02 + 0.008;
+    this.pulseOffset = Math.random() * Math.PI * 2;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life--;
+
+    // Gentle mouse interaction
+    const dx = this.x - mouseX;
+    const dy = this.y - mouseY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 120 && dist > 0) {
+      const force = (120 - dist) / 120 * 0.6;
+      this.x += (dx / dist) * force;
+      this.y += (dy / dist) * force;
+    }
+
+    if (this.life <= 0 || this.x < -50 || this.x > canvas.width + 50 || this.y < -50 || this.y > canvas.height + 50) {
+      this.reset();
+    }
+  }
+  draw() {
+    const lifeRatio = this.life / this.maxLife;
+    const pulse = Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset) * 0.3 + 0.7;
+    const alpha = this.opacity * lifeRatio * pulse;
+
+    // Main dot
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${alpha})`;
+    ctx.fill();
+
+    // Soft glow
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 4, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${alpha * 0.1})`;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const count = window.innerWidth < 768 ? 30 : 60;
+  for (let i = 0; i < count; i++) {
+    particles.push(new Particle());
+  }
+}
+initParticles();
+
+function animateParticles(currentTime) {
+  requestAnimationFrame(animateParticles);
+
+  const deltaTime = currentTime - lastTime;
+  if (deltaTime < FRAME_INTERVAL) return;
+  lastTime = currentTime - (deltaTime % FRAME_INTERVAL);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw connections between nearby particles (subtle)
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+
+      if (dist < 120) {
+        const alpha = (1 - dist / 120) * 0.06;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(43,108,176,${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+}
+requestAnimationFrame(animateParticles);
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+/* ======================================================
+   LIVE CLOCK
+   ====================================================== */
+const dayNames = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const monthNames = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+function pad(n){ return n.toString().padStart(2,"0"); }
+function tickClock(){
+  const now = new Date();
+  const h = pad(now.getHours()), m = pad(now.getMinutes()), s = pad(now.getSeconds());
+  document.getElementById("clockTime").innerHTML = `${h}<span class="blink">:</span>${m}<span class="sec">:${s}</span>`;
+  document.getElementById("clockDate").innerHTML = `${dayNames[now.getDay()]}, ${now.getDate()} ${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+  if(document.getElementById("liveTimestamp")){
+    document.getElementById("liveTimestamp").textContent =
+      `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${h}:${m}:${s}`;
+  }
+}
+setInterval(tickClock, 1000);
+tickClock();
+
+function formatTimestampNow(){
+  const now = new Date();
+  return `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+}
+function todayForInput(){
+  const now = new Date();
+  return `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+}
+
+/* ======================================================
+   TOAST
+   ====================================================== */
+function toast(msg, type="err"){
+  const wrap = document.getElementById("toastWrap");
+  const el = document.createElement("div");
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span class="dot"></span>${msg}`;
+  wrap.appendChild(el);
+  setTimeout(()=> el.remove(), 4000);
+}
+
+/* ======================================================
+   SUCCESS OVERLAY
+   ====================================================== */
+let successTimer = null;
+function showSuccess(detailText){
+  const overlay = document.getElementById("successOverlay");
+  const detail = document.getElementById("successDetail");
+  const bar = document.getElementById("successBar");
+  detail.textContent = detailText;
+
+  overlay.classList.remove("show");
+  bar.style.animation = "none";
+  void overlay.offsetWidth;
+  overlay.classList.add("show");
+  bar.style.animation = "shrinkBar 15s linear forwards";
+
+  if(successTimer) clearTimeout(successTimer);
+  successTimer = setTimeout(()=>{
+    overlay.classList.remove("show");
+  }, 15000);
+}
+document.getElementById("successOverlay").addEventListener("click", ()=>{
+  document.getElementById("successOverlay").classList.remove("show");
+  if(successTimer) clearTimeout(successTimer);
+});
+
+/* ======================================================
+   BREADCRUMBS
+   ====================================================== */
+function renderCrumbs(){
+  let html = "";
+  if(state.shift) html += `<span class="crumb active">${state.shift}</span>`;
+  if(state.area) html += `<span class="crumb active">${state.area}</span>`;
+  if(state.item) html += `<span class="crumb active">${state.item.label}</span>`;
+  crumbsEl.innerHTML = html;
+}
+
+/* ======================================================
+   RENDER: STEP 1 - SHIFT
+   ====================================================== */
+function renderShiftStep(){
+  state = { shift:null, area:null, item:null };
+  renderCrumbs();
+  stageEl.innerHTML = `
+    <div class="stage-title">Pilih Shift</div>
+    <div class="grid cols-1" id="shiftGrid"></div>
+  `;
+  const grid = document.getElementById("shiftGrid");
+  SHIFTS.forEach(sh=>{
+    const btn = document.createElement("button");
+    btn.className = "card shift";
+    btn.innerHTML = `${sh.label}<span class="sub">Tim Shift</span>`;
+    btn.onclick = ()=>{ 
+      // Remove selected from all
+      grid.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(() => {
+        state.shift = sh.id; 
+        renderAreaStep(); 
+      }, 200);
+    };
+    grid.appendChild(btn);
+  });
+}
+
+/* ======================================================
+   RENDER: STEP 2 - AREA
+   ====================================================== */
+function renderAreaStep(){
+  state.area = null; state.item = null;
+  renderCrumbs();
+  stageEl.innerHTML = `
+    <button class="back-btn" id="backToShift">← Ganti Shift</button>
+    <div class="stage-title">Pilih Area</div>
+    <div class="grid cols-1" id="areaGrid"></div>
+  `;
+  document.getElementById("backToShift").onclick = renderShiftStep;
+  const grid = document.getElementById("areaGrid");
+  AREAS.forEach(a=>{
+    const btn = document.createElement("button");
+    btn.className = `card ${a.css}`;
+    const count = ITEMS[a.id].length;
+    btn.innerHTML = `${a.label}<span class="sub">${count} pilihan menu</span>`;
+    btn.onclick = ()=>{ 
+      grid.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(() => {
+        state.area = a.id; 
+        renderItemStep(a); 
+      }, 200);
+    };
+    grid.appendChild(btn);
+  });
+}
+
+/* ======================================================
+   RENDER: STEP 3 - ITEM
+   ====================================================== */
+function renderItemStep(area){
+  state.item = null;
+  renderCrumbs();
+  const list = ITEMS[area.id];
+  stageEl.innerHTML = `
+    <button class="back-btn" id="backToArea">← Pilih Area Lain</button>
+    <div class="stage-title">${area.label} · Pilih Jenis</div>
+    <div class="grid ${list.length>3?'cols-2':'cols-1'}" id="itemGrid"></div>
+  `;
+  document.getElementById("backToArea").onclick = renderAreaStep;
+  const grid = document.getElementById("itemGrid");
+  list.forEach(it=>{
+    const btn = document.createElement("button");
+    btn.className = `card ${area.css}`;
+    btn.style.fontSize = "13.5px";
+    btn.innerHTML = `${it.label}`;
+    btn.onclick = ()=>{ 
+      grid.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(() => {
+        state.item = it; 
+        renderFormStep(area); 
+      }, 200);
+    };
+    grid.appendChild(btn);
+  });
+}
+
+/* ======================================================
+   RENDER: STEP 4 - FORM
+   ====================================================== */
+function renderFormStep(area){
+  renderCrumbs();
+  stageEl.innerHTML = `
+    <button class="back-btn" id="backToItem">← Pilih Jenis Lain</button>
+    <div class="form-panel">
+      <div class="item-banner">${state.item.label}</div>
+
+      <div class="field">
+        <label>Timestamp (otomatis)</label>
+        <div class="readonly" id="liveTimestamp">--</div>
+      </div>
+
+      <div class="field">
+        <label>Tanggal</label>
+        <input type="date" id="tanggalInput" value="${todayForInput()}">
+      </div>
+
+      <div class="field">
+        <label>Tim Shift (otomatis)</label>
+        <div class="readonly">${state.shift}</div>
+      </div>
+
+      <div class="field">
+        <label>Nama</label>
+        <input type="text" id="namaInput" placeholder="Tulis nama Anda" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>Jumlah</label>
+        <div class="qty-row">
+          <button type="button" class="qty-btn" id="qtyMinus">−</button>
+          <input type="number" id="qtyInput" inputmode="numeric" min="0" placeholder="0" value="">
+          <button type="button" class="qty-btn" id="qtyPlus">+</button>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submitBtn">Simpan ke Spreadsheet</button>
+    </div>
+  `;
+  tickClock();
+  document.getElementById("backToItem").onclick = ()=> renderItemStep(area);
+  document.getElementById("qtyMinus").onclick = ()=>{
+    const inp = document.getElementById("qtyInput");
+    inp.value = Math.max(0, (parseInt(inp.value||0)-1));
+  };
+  document.getElementById("qtyPlus").onclick = ()=>{
+    const inp = document.getElementById("qtyInput");
+    inp.value = (parseInt(inp.value||0)+1);
+  };
+  document.getElementById("submitBtn").onclick = ()=> submitEntry(area);
+}
+
+/* ======================================================
+   SUBMIT
+   ====================================================== */
+async function submitEntry(area){
+  const qty = document.getElementById("qtyInput").value;
+  const tanggalRaw = document.getElementById("tanggalInput").value;
+  const nama = document.getElementById("namaInput").value.trim();
+
+  if(nama === ""){
+    toast("Isi nama dulu sebelum menyimpan.", "err");
+    return;
+  }
+  if(qty === "" || qty === null){
+    toast("Isi jumlah dulu sebelum menyimpan.", "err");
+    return;
+  }
+  if(!tanggalRaw){
+    toast("Pilih tanggal dulu.", "err");
+    return;
+  }
+  const [y,m,d] = tanggalRaw.split("-");
+  const tanggalFormatted = `${d}/${m}/${y}`;
+
+  const payload = {
+    timestamp: formatTimestampNow(),
+    tanggal: tanggalFormatted,
+    shift: state.shift,
+    nama: nama,
+    columnKey: state.item.key,
+    value: qty
+  };
+
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.textContent = "Menyimpan…";
+
+  try{
+    if(APPS_SCRIPT_URL.startsWith("GANTI_")){
+      throw new Error("URL Apps Script belum diatur di variabel APPS_SCRIPT_URL.");
+    }
+    await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    showSuccess(`${state.item.label} · Jumlah ${qty} · ${state.shift}`);
+    document.getElementById("qtyInput").value = "";
+    document.getElementById("namaInput").value = "";
+  }catch(err){
+    toast("Gagal simpan: " + err.message, "err");
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "Simpan ke Spreadsheet";
+  }
+}
+
+/* ======================================================
+   INIT
+   ====================================================== */
+renderShiftStep();
+</script>
+</body>
+</html>
